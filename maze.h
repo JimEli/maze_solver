@@ -1,38 +1,36 @@
-#pragma once
-
 #ifndef _MAZE_H_
 #define _MAZE_H_
 
 #include <iostream>
-#include <vector>
+#include "vector.h"
 
 class maze
 {
-	enum { START = 'e', END = '!', SPACE = ' ', WALL = '#', PATH = '*', BACKTRACK = '.' };
+	enum { END = '!', SPACE = ' ', WALL = '#', PATH = '*', BACKTRACK = '.' };
 
-	std::vector<std::string> puzzle;
+	myVector::Vector<std::string> puzzle;
 
 public:
-	maze(std::vector<std::string> p) : puzzle{ p } { }
+	maze(myVector::Vector<std::string> p) : puzzle{ p } { }
 
-	int solve(size_t column = 0, size_t row = 0)
+	int solve(size_t row = 0, size_t column = 0)
 	{
-		if (column < 0 || row < 0 || row >= puzzle[0].size() || column >= puzzle.size())
+		if (row < 0 || column < 0 || row >= puzzle.size() || column >= puzzle[0].size())
 			return false;
 
-		if (puzzle[column][row] == END)
+		if (puzzle[row][column] == END)
 			return true;
 
-		if (puzzle[column][row] != SPACE)
+		if (puzzle[row][column] != SPACE)
 			return false;
 
-		puzzle[column][row] = PATH;
+		puzzle[row][column] = PATH;
 
-		bool solved = solve(column, row - 1) || solve(column, row + 1) || solve(column - 1, row) || solve(column + 1, row);
-		
+		bool solved = solve(row - 1, column) || solve(row + 1, column) || solve(row, column - 1) || solve(row, column + 1);
+
 		if (!solved)
-			puzzle[column][row] = BACKTRACK;
-		
+			puzzle[row][column] = BACKTRACK;
+
 		return solved;
 	}
 
@@ -40,8 +38,9 @@ public:
 	{
 		for (auto const &s : m.puzzle)
 			os << s << '\n';
+		//for (std::size_t i=0; i < m.puzzle.size(); i++)
+			//os << m.puzzle[i] << '\n';
 		return os;
 	}
 };
-
 #endif 
