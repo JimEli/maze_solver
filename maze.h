@@ -38,8 +38,6 @@ public:
 	{
 		for (auto const &s : m.puzzle)
 			os << s << '\n';
-		//for (std::size_t i=0; i < m.puzzle.size(); i++)
-			//os << m.puzzle[i] << '\n';
 		return os;
 	}
 };
