@@ -1,19 +1,22 @@
 #include <iostream>
 #include <string>
-#include <vector>
-
+#include "vector.h"
 #include "maze.h"
+
+// Visual Leak Detector.
+#include "C:\Program Files (x86)\Visual Leak Detector\include\vld.h"
 
 int main()
 {
-	std::vector<std::string> puzzle;
+	myVector::Vector<std::string> puzzle;
 
 	puzzle.push_back("  #######");
 	puzzle.push_back("#    # ##");
 	puzzle.push_back("# ####  #");
 	puzzle.push_back("#      ##");
 	puzzle.push_back("# ### ###");
-	puzzle.push_back("#####  !#");
+	puzzle.push_back("#       #");
+	puzzle.push_back("#######!#");
 
 	maze m = maze(puzzle);
 
