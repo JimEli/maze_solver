@@ -3,9 +3,6 @@
 #include "vector.h"
 #include "maze.h"
 
-// Visual Leak Detector.
-#include "C:\Program Files (x86)\Visual Leak Detector\include\vld.h"
-
 int main()
 {
 	myVector::Vector<std::string> puzzle;
